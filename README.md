@@ -1,3 +1,65 @@
+# 자판기 프로그램
+
+## 기능 목록
+
+1. 입력 받은 금액을 최소한의 동전으로 반환한다.
+2. 상품명과 가격, 수량 단위로 상품을 저장한다.
+3. 상품 가격이 100원 이상이며 10으로 나누어 떨어지는지 검증한다.
+4. 금액을 투입하고 모든 상품이 소진되거나 남은 금액이 상품 최저가보다 적을 때까지 반복한다.
+5. 잔돈을 반환한다. 
+
+## 예외 처리
+
+1. 등록할 상품 가격이 100원 미만이거나 10으로 나누어떨어지지 않는 경우
+2. 상품 목록을 입력 받을 때 빈 값인 경우
+3. 상품 목록을 입력 받을 때 세미콜론만 있는 경우
+4. 입력받은 상품 목록을 세미콜론으로 구분했을 때 하나의 상품 상세가 대괄호로 시작해서 대괄호로 끝나지 않는 경우
+5. 개별 상품 정보를 쉼표로구분했을 때 총 3개의 값으로 나뉠수 없는 경우
+6. 상품명, 가격, 수량 중 어느 하나라도 빈 값이 존재하는 경우
+7. 상품명이 숫자인 경우
+8. 가격이 문자이거나 음의 정수인 경우
+9. 수량이 문자이거나 음의 정수인 경우
+10. 투입한 금액이 빈 값인 경우
+11. 입력받은 투입한 금액이 문자이거나 음의 정수인 경우
+12. 입력받은 구매할 상품명이 빈 값이거나 숫자인 경우
+
+
+## ✔️ Requirement
+
+- [Java 8](https://www.oracle.com/java/technologies/java8.html)
+- [Gradle](https://gradle.org/) (5.4.1 + )
+
+## ✔️ Initialize
+
+```bash
+$ git clone https://github.com/xfrnk2/java-racingcar-precourse.git
+```
+
+## ✔️ Test
+
+[Mac](https://www.apple.com/za/macos/what-is/) or [Linux](https://www.linux.org/)
+
+```bash
+$ ./gradlew clean test
+```
+
+[Windows](https://www.microsoft.com/ko-kr/windows)
+
+```bash
+$ gradlew.bat clean test
+```
+
+## ✔️ License
+
+This project is [MIT](https://github.com/woowacourse/java-racingcar-precourse/blob/master/LICENSE) licensed.
+
+
+
+
+---
+<details markdown="1">
+<summary> 미션 접기/펼치기 </summary>
+
 # 미션 - 자판기
 
 ## 🔍 진행방식
