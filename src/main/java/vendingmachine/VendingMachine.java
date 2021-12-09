@@ -1,15 +1,19 @@
 package vendingmachine;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import com.google.common.base.Splitter;
 
 import vendingmachine.change.Change;
 import vendingmachine.change.ChangeAmount;
+import vendingmachine.item.Item;
 import vendingmachine.item.Items;
 import vendingmachine.paymentAmount.PaymentAmount;
 import vendingmachine.type.DelimiterType;
+import vendingmachine.type.TextType;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -21,7 +25,7 @@ public class VendingMachine {
 		Map<Integer, Integer> changeAmount = initializeHoldingChange(change);
 		Items items = initializeItems();
 		PaymentAmount paymentAmount = initializePaymentAmount();
-		
+
 	}
 
 	private Change initializeChange() {
@@ -86,4 +90,39 @@ public class VendingMachine {
 		}
 		return paymentAmount;
 	}
+
+	private void buyItem(List<Item> items, PaymentAmount paymentAmount) {
+		int leastCost = getLeastCostItem(items).getCost();
+		while (paymentAmount.getPaymentAmount() >= leastCost && !isAllOutOfOrder(items)){
+			try {
+				OutputView.printRemainingPaymentAmount(paymentAmount.getPaymentAmount());
+				String input = InputView.getItemNameToBuy();
+				Item item = checkContainingItem(items, input);
+				paymentAmount.payMoney(item.getCost());
+				System.out.println(item.getName());
+			} catch (IllegalArgumentException e) {
+				OutputView.printError(e.getMessage());
+			}
+		}
+	}
+
+	private Item getLeastCostItem(List<Item> items){
+		return items.stream()
+			.min(Comparator.comparing(Item::getCost))
+			.orElseThrow(IllegalArgumentException::new);
+	}
+
+
+	private Item checkContainingItem(List<Item> items, String name){
+		if (items.stream().noneMatch(item -> name.equals(item.getName()))){
+			throw new IllegalArgumentException(TextType.ERROR_INVALID_NAME.getError());
+		}
+		return items.stream().filter(item -> name.equals(item.getName())).findFirst().get();
+	}
+
+	public boolean isAllOutOfOrder(List<Item> items) {
+		return items.stream().allMatch(item -> item.getAmount() == 0);
+	}
+
+
 }

@@ -3,7 +3,7 @@ package vendingmachine.paymentAmount;
 import vendingmachine.type.TextType;
 
 public class PaymentAmount {
-	private final int money;
+	private int money;
 
 	public PaymentAmount(String money) {
 		this.money = convertToNumber(money);
@@ -27,5 +27,9 @@ public class PaymentAmount {
 
 	public int getPaymentAmount(){
 		return money;
+	}
+
+	public void payMoney(int payedAmount) {
+		this.money -= payedAmount;
 	}
 }
