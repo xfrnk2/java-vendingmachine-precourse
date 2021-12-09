@@ -1,5 +1,8 @@
 package vendingmachine;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -20,13 +23,16 @@ import vendingmachine.view.OutputView;
 public class VendingMachine {
 
 	public void run() {
-
 		Change change = initializeChange(); //refactor 필요 (input 순회 가능하도록)
 		Map<Integer, Integer> changeAmount = initializeHoldingChange(change);
+		OutputView.printHoldingChanges();
+		getChangeStatus(changeAmount);
 		Items items = initializeItems();
+
 		PaymentAmount paymentAmount = initializePaymentAmount();
 		buyItem(items.getItems(), paymentAmount);
-		getChangeStatus(changeAmount);
+		OutputView.printChangeResult();
+		getFinalChangeStatus(changeAmount);
 	}
 
 	private Change initializeChange() {
@@ -40,6 +46,7 @@ public class VendingMachine {
 				OutputView.printError(e.getMessage());
 			}
 		}
+
 		return change;
 
 	}
@@ -62,13 +69,14 @@ public class VendingMachine {
 		Items items;
 		while (true) {
 			try {
-				String input = InputView.getHoldingTotalChanges();
+				String input = InputView.getItemList();
 				items = getItemsByInput(input);
 				break;
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
 			}
 		}
+		OutputView.printNewLine();
 		return items;
 	}
 
@@ -89,6 +97,7 @@ public class VendingMachine {
 				OutputView.printError(e.getMessage());
 			}
 		}
+		OutputView.printNewLine();
 		return paymentAmount;
 	}
 
@@ -100,11 +109,12 @@ public class VendingMachine {
 				String input = InputView.getItemNameToBuy();
 				Item item = checkContainingItem(items, input);
 				paymentAmount.payMoney(item.getCost());
-				System.out.println(item.getName());
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
 			}
+			OutputView.printNewLine();
 		}
+		OutputView.printRemainingPaymentAmount(paymentAmount.getPaymentAmount());
 	}
 
 	private Item getLeastCostItem(List<Item> items){
@@ -126,9 +136,26 @@ public class VendingMachine {
 	}
 
 	private void getChangeStatus(Map<Integer, Integer> changeAmount){
-		for (Integer coin: changeAmount.values()){
+		List<Integer> keys = new ArrayList<>(changeAmount.keySet());
+		keys.sort(Collections.reverseOrder());
+
+		for (Integer coin: keys){
 			OutputView.printChangeStatus(coin, changeAmount.get(coin));
 		}
+		OutputView.printNewLine();
+	}
+
+	private void getFinalChangeStatus(Map<Integer, Integer> changeAmount){
+		List<Integer> keys = new ArrayList<>(changeAmount.keySet());
+		keys.sort(Collections.reverseOrder());
+
+		for (Integer coin: keys){
+			if(changeAmount.get(coin) == 0){
+				continue;
+			}
+			OutputView.printChangeStatus(coin, changeAmount.get(coin));
+		}
+		OutputView.printNewLine();
 	}
 
 
