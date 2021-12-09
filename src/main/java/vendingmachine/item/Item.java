@@ -27,7 +27,6 @@ public class Item {
 			.omitEmptyStrings()
 			.trimResults()
 			.splitToList(extractPrefixAndSuffix(itemDetail));
-		System.out.println(itemInfoList.size());
 		validateSize(itemInfoList);
 
 		return itemInfoList;
@@ -38,7 +37,6 @@ public class Item {
 			&& itemDetail.endsWith(DelimiterType.ITEM_SUFFIX.getDelimiter()))) {
 			throw new IllegalArgumentException("상품 상세는 여는 대괄호([)로 시작하고, 닫는 대괄호(])로 끝나야 합니다.");
 		}
-		System.out.println(itemDetail.substring(1, itemDetail.length() - 1));
 		return itemDetail.substring(1, itemDetail.length() - 1);
 	}
 

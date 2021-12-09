@@ -16,13 +16,11 @@ public class ChangeAmount {
 		for (Coin coin : Coin.values()) {
 			coinMap.put(coin.getAmount(), money / coin.getAmount());
 			money = money % coin.getAmount();
-			System.out.println(money);
 		}
 		return coinMap;
 	}
 
 	public Map<Integer, Integer> getChangeAmount() {
-		System.out.println(this.changeAmount);
 		return Collections.unmodifiableMap(changeAmount);
 	}
 
