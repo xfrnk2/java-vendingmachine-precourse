@@ -50,5 +50,23 @@ public class VendingMachine {
 		return machineHoldingChange;
 	}
 
+	private Items initializeItems() {
+		Items items;
+		while (true) {
+			try {
+				String input = InputView.getHoldingTotalChanges();
+				items = getItemsByInput(input);
+				break;
+			} catch (IllegalArgumentException e) {
+				OutputView.printError(e.getMessage());
+			}
+		}
+		return items;
+	}
 
+	private Items getItemsByInput(String input) {
+		List<String> itemList = Splitter.on(DelimiterType.SEMICOLON.getDelimiter())
+			.omitEmptyStrings().trimResults().splitToList(input);
+		return new Items(itemList);
+	}
 }
