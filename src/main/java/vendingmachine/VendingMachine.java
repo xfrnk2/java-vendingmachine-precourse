@@ -8,6 +8,7 @@ import com.google.common.base.Splitter;
 import vendingmachine.change.Change;
 import vendingmachine.change.ChangeAmount;
 import vendingmachine.item.Items;
+import vendingmachine.paymentAmount.PaymentAmount;
 import vendingmachine.type.DelimiterType;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -19,6 +20,8 @@ public class VendingMachine {
 		Change change = initializeChange(); //refactor 필요 (input 순회 가능하도록)
 		Map<Integer, Integer> changeAmount = initializeHoldingChange(change);
 		Items items = initializeItems();
+		PaymentAmount paymentAmount = initializePaymentAmount();
+		
 	}
 
 	private Change initializeChange() {
@@ -68,5 +71,19 @@ public class VendingMachine {
 		List<String> itemList = Splitter.on(DelimiterType.SEMICOLON.getDelimiter())
 			.omitEmptyStrings().trimResults().splitToList(input);
 		return new Items(itemList);
+	}
+
+	private PaymentAmount initializePaymentAmount() {
+		PaymentAmount paymentAmount;
+		while (true) {
+			try {
+				String input = InputView.getPaymentAmount();
+				paymentAmount = new PaymentAmount(input);
+				break;
+			} catch (IllegalArgumentException e) {
+				OutputView.printError(e.getMessage());
+			}
+		}
+		return paymentAmount;
 	}
 }
