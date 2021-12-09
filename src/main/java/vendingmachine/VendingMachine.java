@@ -25,7 +25,8 @@ public class VendingMachine {
 		Map<Integer, Integer> changeAmount = initializeHoldingChange(change);
 		Items items = initializeItems();
 		PaymentAmount paymentAmount = initializePaymentAmount();
-
+		buyItem(items.getItems(), paymentAmount);
+		getChangeStatus(changeAmount);
 	}
 
 	private Change initializeChange() {
@@ -122,6 +123,12 @@ public class VendingMachine {
 
 	public boolean isAllOutOfOrder(List<Item> items) {
 		return items.stream().allMatch(item -> item.getAmount() == 0);
+	}
+
+	private void getChangeStatus(Map<Integer, Integer> changeAmount){
+		for (Integer coin: changeAmount.values()){
+			OutputView.printChangeStatus(coin, changeAmount.get(coin));
+		}
 	}
 
 
