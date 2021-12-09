@@ -51,7 +51,7 @@ public class VendingMachineTest {
 	@Test
 	public void initializeItem(){
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Item item = new Item("[콜라,-1,101]");
+			Item item = new Item("[콜라,101,150]");
 			Item item2 = new Item("[콜라,asd,]");
 		});
 	}

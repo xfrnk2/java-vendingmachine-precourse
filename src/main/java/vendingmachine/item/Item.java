@@ -19,6 +19,7 @@ public class Item {
 		this.name = itemInfoList.get(0);
 		this.cost = convertToNumber(itemInfoList.get(1), "가격");
 		this.amount = convertToNumber(itemInfoList.get(2), "수량");
+		isInvalidCostCondition(this.cost);
 	}
 
 	public List<String> initialize(String itemDetail) {
@@ -58,6 +59,13 @@ public class Item {
 			throw new IllegalArgumentException(String.format(TextType.ERROR_IS_NOT_NUMBER.getError(), unit));
 		}
 	}
+
+	private void isInvalidCostCondition(int cost){
+		if (!(cost % 10 == 0 && 100 <= cost)){
+			throw new IllegalArgumentException(TextType.ERROR_COST_INVALID_CONDITION.getError());
+		}
+	}
+
 
 	public String getName() {
 		return this.name;
