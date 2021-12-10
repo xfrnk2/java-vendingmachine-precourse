@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static camp.nextstep.edu.missionutils.test.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -35,16 +36,16 @@ public class VendingMachineControllerTest {
 	@Test
 	public void initializeItems(){
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Items items = new Items(Arrays.asList(";"));
+			Items items = new Items(Collections.singletonList(";"));
 		});
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Items items = new Items(Arrays.asList(","));
+			Items items = new Items(Collections.singletonList(","));
 		});
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Items items = new Items(Arrays.asList(""));
+			Items items = new Items(Collections.singletonList(""));
 		});
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Items items = new Items(Arrays.asList("a,b"));
+			Items items = new Items(Collections.singletonList("a,b"));
 		});
 	}
 
