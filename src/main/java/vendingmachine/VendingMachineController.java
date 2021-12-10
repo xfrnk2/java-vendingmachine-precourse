@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import static vendingmachine.service.ChangeService.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +15,7 @@ import vendingmachine.change.ChangeAmount;
 import vendingmachine.item.Item;
 import vendingmachine.item.Items;
 import vendingmachine.payment.PaymentAmount;
+import vendingmachine.service.ChangeService;
 import vendingmachine.type.DelimiterType;
 import vendingmachine.type.ErrorType;
 import vendingmachine.view.InputView;
@@ -22,37 +25,18 @@ public class VendingMachineController {
 
 	public void run() {
 
-		Change change = initializeChange(); //refactor 필요 (input 순회 가능하도록)
-		Map<Integer, Integer> changeAmount = initializeHoldingChange(change);
-		OutputView.printHoldingChanges();
-		getChangeStatus(changeAmount);
-		Items items = initializeItems();
+		Change change = ChangeService.initializeChange(); //refactor 필요 (input 순회 가능하도록)
+		Map<Integer, Integer> changeAmount = ChangeService.initializeHoldingChange(change);
+		showHoldingChanges(changeAmount);
 
+		Items items = initializeItems();
 		PaymentAmount paymentAmount = initializePaymentAmount();
 		buyItem(items.getItems(), paymentAmount);
 		OutputView.printChangeResult();
 		getFinalChangeStatus(changeAmount);
 	}
 
-	private Change initializeChange() {
-			try {
-				String input = InputView.getHoldingTotalChanges();
-				return new Change(input);
-			} catch (IllegalArgumentException e) {
-				OutputView.printError(e.getMessage());
-				return initializeChange();
-			}
-	}
 
-	private Map<Integer, Integer> initializeHoldingChange(Change change) {
-			try {
-				ChangeAmount changeAmount = new ChangeAmount(change.getChange());
-				return changeAmount.getChangeAmount();
-			} catch (IllegalArgumentException e) {
-				OutputView.printError(e.getMessage());
-				return initializeHoldingChange(change);
-			}
-		}
 
 	private Items initializeItems() {
 			try {
@@ -122,15 +106,6 @@ public class VendingMachineController {
 		return items.stream().allMatch(item -> item.getAmount() == 0);
 	}
 
-	private void getChangeStatus(Map<Integer, Integer> changeAmount){
-		List<Integer> keys = new ArrayList<>(changeAmount.keySet());
-		keys.sort(Collections.reverseOrder());
-
-		for (Integer coin: keys){
-			OutputView.printChangeStatus(coin, changeAmount.get(coin));
-		}
-		OutputView.printNewLine();
-	}
 
 	private void getFinalChangeStatus(Map<Integer, Integer> changeAmount){
 		List<Integer> keys = new ArrayList<>(changeAmount.keySet());
