@@ -16,6 +16,4 @@ public interface MoneyInterface {
 			throw new IllegalArgumentException(ErrorType.ERROR_IS_NEGATIVE.getError());
 		}
 	}
-
-	;
 }

@@ -1,13 +1,10 @@
 package vendingmachine;
 
+import java.util.Collections;
+import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static camp.nextstep.edu.missionutils.test.Assertions.*;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 import vendingmachine.change.Change;
 import vendingmachine.change.ChangeAmount;
@@ -17,14 +14,14 @@ import vendingmachine.item.Items;
 public class VendingMachineControllerTest {
 
 	@Test
-	public void initializeChange(){
+	public void initializeChange() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			Change change = new Change("-1");
 		});
 	}
 
 	@Test
-	public void initializeHoldingChanges(){
+	public void initializeHoldingChanges() {
 		ChangeAmount changeAmount = new ChangeAmount(450);
 		Map<Integer, Integer> changes = changeAmount.getChangeAmount();
 		Assertions.assertEquals(changes.get(500), 0);
@@ -34,7 +31,7 @@ public class VendingMachineControllerTest {
 	}
 
 	@Test
-	public void initializeItems(){
+	public void initializeItems() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			Items items = new Items(Collections.singletonList(";"));
 		});
@@ -50,7 +47,7 @@ public class VendingMachineControllerTest {
 	}
 
 	@Test
-	public void initializeItem(){
+	public void initializeItem() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			Item item = new Item("[콜라,101,150]");
 			Item item2 = new Item("[콜라,asd,]");

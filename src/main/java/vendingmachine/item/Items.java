@@ -10,40 +10,37 @@ import vendingmachine.type.ErrorType;
 public class Items {
 	private final List<Item> items;
 
-
-	public Items(List<String> itemList){
+	public Items(List<String> itemList) {
 		validate(itemList);
 		this.items = initialize(itemList);
 	}
 
-	private List<Item> initialize(List<String> itemList){
+	private List<Item> initialize(List<String> itemList) {
 		List<Item> items = new ArrayList<Item>();
-		for (String itemDetail : itemList){
+		for (String itemDetail : itemList) {
 			items.add(new Item(itemDetail));
 		}
 		return items;
 	}
 
-	private void validate(List<String> itemList){
-		if (itemList == null || itemList.isEmpty()){
+	private void validate(List<String> itemList) {
+		if (itemList == null || itemList.isEmpty()) {
 			throw new IllegalArgumentException(ErrorType.ERROR_IS_EMPTY.getError());
 		}
 	}
 
-	public List<Item> findAll(){
+	public List<Item> findAll() {
 		return Collections.unmodifiableList(items);
 	}
 
-
-	public Item findLeastCostItem(){
+	public Item findLeastCostItem() {
 		return items.stream()
 			.min(Comparator.comparing(Item::getCost))
 			.orElseThrow(IllegalArgumentException::new);
 	}
 
-
-	public Item findItem(String name){
-		if (items.stream().noneMatch(item -> name.equals(item.getName()))){
+	public Item findItem(String name) {
+		if (items.stream().noneMatch(item -> name.equals(item.getName()))) {
 			throw new IllegalArgumentException(ErrorType.ERROR_INVALID_NAME.getError());
 		}
 		return items

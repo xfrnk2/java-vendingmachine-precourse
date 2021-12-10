@@ -58,12 +58,11 @@ public class Item {
 		}
 	}
 
-	private void isInvalidCostCondition(int cost){
-		if (!(cost % 10 == 0 && 100 <= cost)){
+	private void isInvalidCostCondition(int cost) {
+		if (!(cost % 10 == 0 && 100 <= cost)) {
 			throw new IllegalArgumentException(ErrorType.ERROR_COST_INVALID_CONDITION.getError());
 		}
 	}
-
 
 	public String getName() {
 		return this.name;
