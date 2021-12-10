@@ -35,49 +35,38 @@ public class VendingMachine {
 	}
 
 	private Change initializeChange() {
-		Change change;
 		while (true) {
 			try {
 				String input = InputView.getHoldingTotalChanges();
-				change = new Change(input);
-				break;
+				return new Change(input);
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
+				return initializeChange();
 			}
 		}
-
-		return change;
-
 	}
 
 	private Map<Integer, Integer> initializeHoldingChange(Change change) {
-		Map<Integer, Integer> machineHoldingChange;
-		while (true) {
 			try {
 				ChangeAmount changeAmount = new ChangeAmount(change.getChange());
-				machineHoldingChange = changeAmount.getChangeAmount();
-				break;
+				return changeAmount.getChangeAmount();
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
+				return initializeHoldingChange(change);
 			}
 		}
-		return machineHoldingChange;
-	}
 
 	private Items initializeItems() {
-		Items items;
-		while (true) {
 			try {
 				String input = InputView.getItemList();
-				items = getItemsByInput(input);
-				break;
+				Items items = getItemsByInput(input);
+				OutputView.printNewLine();
+				return items;
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
+				return initializeItems();
 			}
 		}
-		OutputView.printNewLine();
-		return items;
-	}
 
 	private Items getItemsByInput(String input) {
 		List<String> itemList = Splitter.on(DelimiterType.SEMICOLON.getDelimiter())
@@ -86,19 +75,16 @@ public class VendingMachine {
 	}
 
 	private PaymentAmount initializePaymentAmount() {
-		PaymentAmount paymentAmount;
-		while (true) {
 			try {
 				String input = InputView.getPaymentAmount();
-				paymentAmount = new PaymentAmount(input);
-				break;
+				PaymentAmount paymentAmount = new PaymentAmount(input);
+				OutputView.printNewLine();
+				return paymentAmount;
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
+				return initializePaymentAmount();
 			}
 		}
-		OutputView.printNewLine();
-		return paymentAmount;
-	}
 
 	private void buyItem(List<Item> items, PaymentAmount paymentAmount) {
 		int leastCost = getLeastCostItem(items).getCost();
@@ -127,7 +113,11 @@ public class VendingMachine {
 		if (items.stream().noneMatch(item -> name.equals(item.getName()))){
 			throw new IllegalArgumentException(ErrorType.ERROR_INVALID_NAME.getError());
 		}
-		return items.stream().filter(item -> name.equals(item.getName())).findFirst().get();
+		return items
+			.stream()
+			.filter(item -> name.equals(item.getName()))
+			.findFirst()
+			.get();
 	}
 
 	public boolean isAllOutOfOrder(List<Item> items) {
