@@ -15,20 +15,6 @@ public class Items {
 		this.items = initialize(itemList);
 	}
 
-	private List<Item> initialize(List<String> itemList) {
-		List<Item> items = new ArrayList<Item>();
-		for (String itemDetail : itemList) {
-			items.add(new Item(itemDetail));
-		}
-		return items;
-	}
-
-	private void validate(List<String> itemList) {
-		if (itemList == null || itemList.isEmpty()) {
-			throw new IllegalArgumentException(ErrorType.ERROR_IS_EMPTY.getError());
-		}
-	}
-
 	public List<Item> findAll() {
 		return Collections.unmodifiableList(items);
 	}
@@ -54,4 +40,17 @@ public class Items {
 		return items.stream().allMatch(item -> item.getAmount() == 0);
 	}
 
+	private List<Item> initialize(List<String> itemList) {
+		List<Item> items = new ArrayList<Item>();
+		for (String itemDetail : itemList) {
+			items.add(new Item(itemDetail));
+		}
+		return items;
+	}
+
+	private void validate(List<String> itemList) {
+		if (itemList == null || itemList.isEmpty()) {
+			throw new IllegalArgumentException(ErrorType.ERROR_IS_EMPTY.getError());
+		}
+	}
 }

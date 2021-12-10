@@ -19,13 +19,26 @@ public class ChangeService {
 		}
 	}
 
-	public static ChangeAmount initializeHoldingChange(Change change) {
+	public static void showFinalChangeStatus(Map<Integer, Integer> changeAmount) {
+		List<Integer> keys = new ArrayList<>(changeAmount.keySet());
+		keys.sort(Collections.reverseOrder());
+
+		for (Integer coin : keys) {
+			if (changeAmount.get(coin) == 0) {
+				continue;
+			}
+			OutputView.printChangeStatus(coin, changeAmount.get(coin));
+		}
+		OutputView.printNewLine();
+	}
+
+	private static ChangeAmount initializeHoldingChange(Change change) {
 		ChangeAmount changeAmount = new ChangeAmount(change.getChange());
 		showHoldingChanges(changeAmount.getChangeAmount());
 		return changeAmount;
 	}
 
-	public static void showHoldingChanges(Map<Integer, Integer> changeAmount) {
+	private static void showHoldingChanges(Map<Integer, Integer> changeAmount) {
 		OutputView.printHoldingChanges();
 		getChangeStatus(changeAmount);
 	}
@@ -40,16 +53,4 @@ public class ChangeService {
 		OutputView.printNewLine();
 	}
 
-	public static void showFinalChangeStatus(Map<Integer, Integer> changeAmount) {
-		List<Integer> keys = new ArrayList<>(changeAmount.keySet());
-		keys.sort(Collections.reverseOrder());
-
-		for (Integer coin : keys) {
-			if (changeAmount.get(coin) == 0) {
-				continue;
-			}
-			OutputView.printChangeStatus(coin, changeAmount.get(coin));
-		}
-		OutputView.printNewLine();
-	}
 }
