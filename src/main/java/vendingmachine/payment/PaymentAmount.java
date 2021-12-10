@@ -1,4 +1,4 @@
-package vendingmachine.paymentAmount;
+package vendingmachine.payment;
 
 import vendingmachine.MoneyInterface;
 

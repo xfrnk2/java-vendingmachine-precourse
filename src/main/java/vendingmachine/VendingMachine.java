@@ -12,7 +12,7 @@ import vendingmachine.change.Change;
 import vendingmachine.change.ChangeAmount;
 import vendingmachine.item.Item;
 import vendingmachine.item.Items;
-import vendingmachine.paymentAmount.PaymentAmount;
+import vendingmachine.payment.PaymentAmount;
 import vendingmachine.type.DelimiterType;
 import vendingmachine.type.ErrorType;
 import vendingmachine.view.InputView;
