@@ -16,6 +16,8 @@ import vendingmachine.item.Item;
 import vendingmachine.item.Items;
 import vendingmachine.payment.PaymentAmount;
 import vendingmachine.service.ChangeService;
+import vendingmachine.service.ItemsService;
+import vendingmachine.service.PaymentService;
 import vendingmachine.type.DelimiterType;
 import vendingmachine.type.ErrorType;
 import vendingmachine.view.InputView;
@@ -28,8 +30,9 @@ public class VendingMachineController {
 		Map<Integer, Integer> changeAmount = ChangeService.initializeHoldingChange();
 		showHoldingChanges(changeAmount);
 
-		Items items = initializeItems();
-		PaymentAmount paymentAmount = initializePaymentAmount();
+		Items items = ItemsService.initializeItems();
+		PaymentAmount paymentAmount = PaymentService.initializePaymentAmount();
+
 		buyItem(items.getItems(), paymentAmount);
 		OutputView.printChangeResult();
 		getFinalChangeStatus(changeAmount);
@@ -37,43 +40,15 @@ public class VendingMachineController {
 
 
 
-	private Items initializeItems() {
-			try {
-				String input = InputView.getItemList();
-				Items items = getItemsByInput(input);
-				OutputView.printNewLine();
-				return items;
-			} catch (IllegalArgumentException e) {
-				OutputView.printError(e.getMessage());
-				return initializeItems();
-			}
-		}
 
-	private Items getItemsByInput(String input) {
-		List<String> itemList = Splitter.on(DelimiterType.SEMICOLON.getDelimiter())
-			.omitEmptyStrings().trimResults().splitToList(input);
-		return new Items(itemList);
-	}
-
-	private PaymentAmount initializePaymentAmount() {
-			try {
-				String input = InputView.getPaymentAmount();
-				PaymentAmount paymentAmount = new PaymentAmount(input);
-				OutputView.printNewLine();
-				return paymentAmount;
-			} catch (IllegalArgumentException e) {
-				OutputView.printError(e.getMessage());
-				return initializePaymentAmount();
-			}
-		}
 
 	private void buyItem(List<Item> items, PaymentAmount paymentAmount) {
-		int leastCost = getLeastCostItem(items).getCost();
-		while (paymentAmount.getPaymentAmount() >= leastCost && !isAllOutOfOrder(items)){
+		int leastCost = ItemsService.getLeastCostItem(items).getCost();
+		while (paymentAmount.getPaymentAmount() >= leastCost && !ItemsService.isAllOutOfOrder(items)){
 			try {
 				OutputView.printRemainingPaymentAmount(paymentAmount.getPaymentAmount());
 				String input = InputView.getItemNameToBuy();
-				Item item = checkContainingItem(items, input);
+				Item item = ItemsService.checkContainingItem(items, input);
 				paymentAmount.payMoney(item.getCost());
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
@@ -83,27 +58,6 @@ public class VendingMachineController {
 		OutputView.printRemainingPaymentAmount(paymentAmount.getPaymentAmount());
 	}
 
-	private Item getLeastCostItem(List<Item> items){
-		return items.stream()
-			.min(Comparator.comparing(Item::getCost))
-			.orElseThrow(IllegalArgumentException::new);
-	}
-
-
-	private Item checkContainingItem(List<Item> items, String name){
-		if (items.stream().noneMatch(item -> name.equals(item.getName()))){
-			throw new IllegalArgumentException(ErrorType.ERROR_INVALID_NAME.getError());
-		}
-		return items
-			.stream()
-			.filter(item -> name.equals(item.getName()))
-			.findFirst()
-			.get();
-	}
-
-	public boolean isAllOutOfOrder(List<Item> items) {
-		return items.stream().allMatch(item -> item.getAmount() == 0);
-	}
 
 
 	private void getFinalChangeStatus(Map<Integer, Integer> changeAmount){
