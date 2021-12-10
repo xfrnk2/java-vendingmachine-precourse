@@ -18,7 +18,7 @@ import vendingmachine.type.ErrorType;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-public class VendingMachine {
+public class VendingMachineController {
 
 	public void run() {
 

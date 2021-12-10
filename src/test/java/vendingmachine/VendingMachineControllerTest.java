@@ -13,7 +13,7 @@ import vendingmachine.change.ChangeAmount;
 import vendingmachine.item.Item;
 import vendingmachine.item.Items;
 
-public class VendingMachineTest {
+public class VendingMachineControllerTest {
 
 	@Test
 	public void initializeChange(){
