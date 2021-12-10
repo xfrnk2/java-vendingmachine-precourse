@@ -1,8 +1,8 @@
 package vendingmachine.paymentAmount;
 
-import vendingmachine.Money;
+import vendingmachine.MoneyInterface;
 
-public class PaymentAmount implements Money {
+public class PaymentAmount implements MoneyInterface {
 	private int money;
 
 	public PaymentAmount(String money) {

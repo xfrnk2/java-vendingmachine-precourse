@@ -2,7 +2,7 @@ package vendingmachine;
 
 import vendingmachine.type.ErrorType;
 
-public interface Money {
+public interface MoneyInterface {
 	default int convertToNumber(String amount){
 		try {
 			return Integer.parseInt(amount);
