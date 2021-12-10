@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.common.base.Splitter;
 
 import vendingmachine.type.DelimiterType;
-import vendingmachine.type.TextType;
+import vendingmachine.type.ErrorType;
 
 public class Item {
 
@@ -50,17 +50,17 @@ public class Item {
 		try {
 			int converted = Integer.parseInt(value);
 			if (converted < 0) {
-				throw new IllegalArgumentException(TextType.ERROR_IS_NOT_NUMBER.getError());
+				throw new IllegalArgumentException(ErrorType.ERROR_IS_NOT_NUMBER.getError());
 			}
 			return converted;
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(String.format(TextType.ERROR_IS_NOT_NUMBER.getError(), unit));
+			throw new IllegalArgumentException(String.format(ErrorType.ERROR_IS_NOT_NUMBER.getError(), unit));
 		}
 	}
 
 	private void isInvalidCostCondition(int cost){
 		if (!(cost % 10 == 0 && 100 <= cost)){
-			throw new IllegalArgumentException(TextType.ERROR_COST_INVALID_CONDITION.getError());
+			throw new IllegalArgumentException(ErrorType.ERROR_COST_INVALID_CONDITION.getError());
 		}
 	}
 

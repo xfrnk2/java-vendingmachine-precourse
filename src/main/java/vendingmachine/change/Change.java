@@ -1,6 +1,6 @@
 package vendingmachine.change;
 
-import vendingmachine.type.TextType;
+import vendingmachine.type.ErrorType;
 
 public class Change {
 	private final int money;
@@ -15,13 +15,13 @@ public class Change {
 		try {
 			return Integer.parseInt(money);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(String.format(TextType.ERROR_IS_NOT_NUMBER.getError(), "자판기 보유 금액"));
+			throw new IllegalArgumentException(String.format(ErrorType.ERROR_IS_NOT_NUMBER.getError(), "자판기 보유 금액"));
 		}
 	}
 
 	private void validate(int money){
 		if (money < 0){
-			throw new IllegalArgumentException(TextType.ERROR_IS_NEGATIVE.getError());
+			throw new IllegalArgumentException(ErrorType.ERROR_IS_NEGATIVE.getError());
 		}
 	}
 

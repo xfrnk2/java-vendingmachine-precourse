@@ -1,6 +1,6 @@
 package vendingmachine.type;
 
-public enum TextType {
+public enum ErrorType {
 	ERROR_PREFIX("[ERROR] "),
 	ERROR_IS_NOT_NUMBER("%s은(는) 숫자여야 합니다.%n"),
 	ERROR_IS_EMPTY("빈 값을 입력할 수 없습니다. %n"),
@@ -10,7 +10,7 @@ public enum TextType {
 
 	private final String error;
 
-	TextType(String error) {
+	ErrorType(String error) {
 		this.error = error;
 	}
 

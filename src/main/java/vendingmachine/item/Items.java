@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import vendingmachine.type.TextType;
+import vendingmachine.type.ErrorType;
 
 public class Items {
 	private final List<Item> items;
@@ -25,7 +25,7 @@ public class Items {
 
 	private void validate(List<String> itemList){
 		if (itemList == null || itemList.isEmpty()){
-			throw new IllegalArgumentException(TextType.ERROR_IS_EMPTY.getError());
+			throw new IllegalArgumentException(ErrorType.ERROR_IS_EMPTY.getError());
 		}
 	}
 

@@ -1,12 +1,10 @@
 package vendingmachine;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import com.google.common.base.Splitter;
 
@@ -16,13 +14,14 @@ import vendingmachine.item.Item;
 import vendingmachine.item.Items;
 import vendingmachine.paymentAmount.PaymentAmount;
 import vendingmachine.type.DelimiterType;
-import vendingmachine.type.TextType;
+import vendingmachine.type.ErrorType;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachine {
 
 	public void run() {
+
 		Change change = initializeChange(); //refactor 필요 (input 순회 가능하도록)
 		Map<Integer, Integer> changeAmount = initializeHoldingChange(change);
 		OutputView.printHoldingChanges();
@@ -126,7 +125,7 @@ public class VendingMachine {
 
 	private Item checkContainingItem(List<Item> items, String name){
 		if (items.stream().noneMatch(item -> name.equals(item.getName()))){
-			throw new IllegalArgumentException(TextType.ERROR_INVALID_NAME.getError());
+			throw new IllegalArgumentException(ErrorType.ERROR_INVALID_NAME.getError());
 		}
 		return items.stream().filter(item -> name.equals(item.getName())).findFirst().get();
 	}
