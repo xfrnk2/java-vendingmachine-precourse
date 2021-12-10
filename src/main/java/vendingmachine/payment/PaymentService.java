@@ -1,6 +1,5 @@
-package vendingmachine.service;
+package vendingmachine.payment;
 
-import vendingmachine.payment.PaymentAmount;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 

@@ -1,10 +1,9 @@
-package vendingmachine.service;
+package vendingmachine.item;
 
 import java.util.List;
 
 import com.google.common.base.Splitter;
 
-import vendingmachine.item.Items;
 import vendingmachine.type.DelimiterType;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;

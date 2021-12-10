@@ -1,12 +1,10 @@
-package vendingmachine.service;
+package vendingmachine.change;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import vendingmachine.change.Change;
-import vendingmachine.change.ChangeAmount;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 

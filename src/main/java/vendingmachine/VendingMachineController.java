@@ -4,9 +4,9 @@ import vendingmachine.change.ChangeAmount;
 import vendingmachine.item.Item;
 import vendingmachine.item.Items;
 import vendingmachine.payment.PaymentAmount;
-import vendingmachine.service.ChangeService;
-import vendingmachine.service.ItemsService;
-import vendingmachine.service.PaymentService;
+import vendingmachine.change.ChangeService;
+import vendingmachine.item.ItemsService;
+import vendingmachine.payment.PaymentService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
