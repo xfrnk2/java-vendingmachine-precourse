@@ -40,7 +40,7 @@ public class ChangeService {
 		OutputView.printNewLine();
 	}
 
-	public static void getFinalChangeStatus(Map<Integer, Integer> changeAmount) {
+	public static void showFinalChangeStatus(Map<Integer, Integer> changeAmount) {
 		List<Integer> keys = new ArrayList<>(changeAmount.keySet());
 		keys.sort(Collections.reverseOrder());
 

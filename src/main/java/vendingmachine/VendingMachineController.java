@@ -19,7 +19,7 @@ public class VendingMachineController {
 
 		buyItem(items, paymentAmount);
 		OutputView.printChangeResult();
-		ChangeService.getFinalChangeStatus(changeAmount.getChangeAmount());
+		ChangeService.showFinalChangeStatus(changeAmount.getChangeAmount());
 	}
 
 	private void buyItem(Items items, PaymentAmount paymentAmount) {
