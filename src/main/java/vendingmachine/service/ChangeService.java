@@ -21,14 +21,10 @@ public class ChangeService {
 		}
 	}
 
-	public static Map<Integer, Integer> initializeHoldingChange(Change change) {
-		try {
-			ChangeAmount changeAmount = new ChangeAmount(change.getChange());
-			return changeAmount.getChangeAmount();
-		} catch (IllegalArgumentException e) {
-			OutputView.printError(e.getMessage());
-			return initializeHoldingChange(change);
-		}
+	public static Map<Integer, Integer> initializeHoldingChange() {
+		Change change = initializeChange();
+		ChangeAmount changeAmount = new ChangeAmount(change.getChange());
+		return changeAmount.getChangeAmount();
 	}
 
 	public static void showHoldingChanges(Map<Integer, Integer> changeAmount){

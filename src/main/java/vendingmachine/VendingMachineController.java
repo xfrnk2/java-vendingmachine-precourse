@@ -25,8 +25,7 @@ public class VendingMachineController {
 
 	public void run() {
 
-		Change change = ChangeService.initializeChange(); //refactor 필요 (input 순회 가능하도록)
-		Map<Integer, Integer> changeAmount = ChangeService.initializeHoldingChange(change);
+		Map<Integer, Integer> changeAmount = ChangeService.initializeHoldingChange();
 		showHoldingChanges(changeAmount);
 
 		Items items = initializeItems();
