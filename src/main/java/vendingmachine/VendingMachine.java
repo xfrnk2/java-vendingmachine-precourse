@@ -35,7 +35,6 @@ public class VendingMachine {
 	}
 
 	private Change initializeChange() {
-		while (true) {
 			try {
 				String input = InputView.getHoldingTotalChanges();
 				return new Change(input);
@@ -43,7 +42,6 @@ public class VendingMachine {
 				OutputView.printError(e.getMessage());
 				return initializeChange();
 			}
-		}
 	}
 
 	private Map<Integer, Integer> initializeHoldingChange(Change change) {
