@@ -1,14 +1,11 @@
 package vendingmachine.service;
 
-import java.util.Comparator;
 import java.util.List;
 
 import com.google.common.base.Splitter;
 
-import vendingmachine.item.Item;
 import vendingmachine.item.Items;
 import vendingmachine.type.DelimiterType;
-import vendingmachine.type.ErrorType;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -32,26 +29,4 @@ public class ItemsService {
 		return new Items(itemList);
 	}
 
-
-	public static Item getLeastCostItem(List<Item> items){
-		return items.stream()
-			.min(Comparator.comparing(Item::getCost))
-			.orElseThrow(IllegalArgumentException::new);
-	}
-
-
-	public static Item checkContainingItem(List<Item> items, String name){
-		if (items.stream().noneMatch(item -> name.equals(item.getName()))){
-			throw new IllegalArgumentException(ErrorType.ERROR_INVALID_NAME.getError());
-		}
-		return items
-			.stream()
-			.filter(item -> name.equals(item.getName()))
-			.findFirst()
-			.get();
-	}
-
-	public static boolean isAllOutOfOrder(List<Item> items) {
-		return items.stream().allMatch(item -> item.getAmount() == 0);
-	}
 }

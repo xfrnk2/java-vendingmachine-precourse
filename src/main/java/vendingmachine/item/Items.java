@@ -2,6 +2,7 @@ package vendingmachine.item;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import vendingmachine.type.ErrorType;
@@ -29,8 +30,31 @@ public class Items {
 		}
 	}
 
-	public List<Item> getItems(){
+	public List<Item> findAll(){
 		return Collections.unmodifiableList(items);
+	}
+
+
+	public Item findLeastCostItem(){
+		return items.stream()
+			.min(Comparator.comparing(Item::getCost))
+			.orElseThrow(IllegalArgumentException::new);
+	}
+
+
+	public Item findItem(String name){
+		if (items.stream().noneMatch(item -> name.equals(item.getName()))){
+			throw new IllegalArgumentException(ErrorType.ERROR_INVALID_NAME.getError());
+		}
+		return items
+			.stream()
+			.filter(item -> name.equals(item.getName()))
+			.findFirst()
+			.get();
+	}
+
+	public boolean isAllOutOfOrder() {
+		return items.stream().allMatch(item -> item.getAmount() == 0);
 	}
 
 }

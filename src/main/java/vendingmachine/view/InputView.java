@@ -8,7 +8,6 @@ public class InputView {
 	public static final String PAYMENT_AMOUNT_MESSAGE = "투입 금액을 입력해 주세요.";
 	public static final String ITEM_NAME_TO_BUY_MESSAGE = "구매할 상품명을 입력해 주세요.";
 
-
 	public static String getHoldingTotalChanges() {
 		System.out.println(MACHINE_HOLDING_MONEY_MESSAGE);
 		return Console.readLine();
@@ -23,7 +22,6 @@ public class InputView {
 		System.out.println(PAYMENT_AMOUNT_MESSAGE);
 		return Console.readLine();
 	}
-
 
 	public static String getItemNameToBuy() {
 		System.out.printf(ITEM_NAME_TO_BUY_MESSAGE + "%n");

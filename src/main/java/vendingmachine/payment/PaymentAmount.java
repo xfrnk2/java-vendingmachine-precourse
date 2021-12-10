@@ -11,7 +11,7 @@ public class PaymentAmount implements MoneyInterface {
 
 	}
 
-	public int getPaymentAmount(){
+	public int getPaymentAmount() {
 		return money;
 	}
 

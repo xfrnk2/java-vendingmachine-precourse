@@ -11,7 +11,7 @@ public class Change implements MoneyInterface {
 
 	}
 
-	public int getChange(){
+	public int getChange() {
 		return money;
 	}
 }
