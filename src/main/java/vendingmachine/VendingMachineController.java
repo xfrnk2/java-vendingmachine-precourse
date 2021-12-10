@@ -1,11 +1,11 @@
 package vendingmachine;
 
 import vendingmachine.change.ChangeAmount;
+import vendingmachine.change.ChangeService;
 import vendingmachine.item.Item;
 import vendingmachine.item.Items;
+import vendingmachine.item.ItemService;
 import vendingmachine.payment.PaymentAmount;
-import vendingmachine.change.ChangeService;
-import vendingmachine.item.ItemsService;
 import vendingmachine.payment.PaymentService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -14,7 +14,7 @@ public class VendingMachineController {
 
 	public void run() {
 		ChangeAmount changeAmount = ChangeService.initializeChange();
-		Items items = ItemsService.initializeItems();
+		Items items = ItemService.initializeItems();
 		PaymentAmount paymentAmount = PaymentService.initializePaymentAmount();
 
 		buyItem(items, paymentAmount);

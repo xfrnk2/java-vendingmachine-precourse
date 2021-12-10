@@ -8,7 +8,7 @@ import vendingmachine.type.DelimiterType;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-public class ItemsService {
+public class ItemService {
 
 	public static Items initializeItems() {
 		try {
