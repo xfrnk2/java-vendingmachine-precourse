@@ -6,7 +6,7 @@ public class Change implements MoneyInterface {
 	private final int money;
 
 	public Change(String money) {
-		this.money = convertToNumber(money);
+		this.money = convertStringToNumber(money);
 		validate(this.money);
 
 	}

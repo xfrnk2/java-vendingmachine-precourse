@@ -6,7 +6,7 @@ public class PaymentAmount implements MoneyInterface {
 	private int money;
 
 	public PaymentAmount(String money) {
-		this.money = convertToNumber(money);
+		this.money = convertStringToNumber(money);
 		validate(this.money);
 
 	}

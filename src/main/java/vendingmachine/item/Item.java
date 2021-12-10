@@ -17,8 +17,8 @@ public class Item {
 
 		List<String> itemInfoList = initialize(itemDetail);
 		this.name = itemInfoList.get(0);
-		this.cost = convertToNumber(itemInfoList.get(1), "가격");
-		this.amount = convertToNumber(itemInfoList.get(2), "수량");
+		this.cost = convertStringToNumber(itemInfoList.get(1), "가격");
+		this.amount = convertStringToNumber(itemInfoList.get(2), "수량");
 		isInvalidCostCondition(this.cost);
 	}
 
@@ -46,7 +46,7 @@ public class Item {
 		}
 	}
 
-	private int convertToNumber(String value, String unit) {
+	private int convertStringToNumber(String value, String unit) {
 		try {
 			int converted = Integer.parseInt(value);
 			if (converted < 0) {

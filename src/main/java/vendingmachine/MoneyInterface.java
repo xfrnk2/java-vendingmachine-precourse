@@ -3,7 +3,7 @@ package vendingmachine;
 import vendingmachine.type.ErrorType;
 
 public interface MoneyInterface {
-	default int convertToNumber(String amount) {
+	default int convertStringToNumber(String amount) {
 		try {
 			return Integer.parseInt(amount);
 		} catch (NumberFormatException e) {
