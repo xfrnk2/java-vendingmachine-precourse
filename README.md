@@ -1,3 +1,28 @@
+## ✔️ Requirement
+
+- [Java 8](https://www.oracle.com/java/technologies/java8.html)
+- [Gradle](https://gradle.org/) (5.4.1 + )
+
+## ✔️ Initialize
+
+```bash
+$ git clone https://github.com/xfrnk2/java-racingcar-precourse.git
+```
+
+## ✔️ Test
+
+[Mac](https://www.apple.com/za/macos/what-is/) or [Linux](https://www.linux.org/)
+
+```bash
+$ ./gradlew clean test
+```
+
+[Windows](https://www.microsoft.com/ko-kr/windows)
+
+```bash
+$ gradlew.bat clean test
+```
+
 # 미션 - 자판기
 
 ## 🔍 진행방식
@@ -22,7 +47,7 @@
 ```
 BUILD SUCCESSFUL in 0s
 ```
-
+0315186
 ---
 
 ## 🚀 기능 요구사항
@@ -93,7 +118,7 @@ BUILD SUCCESSFUL in 0s
 
 투입 금액을 입력해 주세요.
 3000
-
+03151868383 8375
 투입 금액: 3000원
 구매할 상품명을 입력해 주세요.
 콜라
@@ -101,7 +126,10 @@ BUILD SUCCESSFUL in 0s
 투입 금액: 1500원
 구매할 상품명을 입력해 주세요.
 사이다
-
+03151868334
+03151864911
+03151864912
+03151864914
 투입 금액: 500원
 잔돈
 100원 - 4개
